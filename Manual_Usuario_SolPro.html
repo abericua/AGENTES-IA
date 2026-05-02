@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - SolPro AI Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00aaff;
+            --dark: #1e1e1e;
+            --text: #333;
+            --bg: #f8f9fa;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: var(--white);
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+        header {
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--dark);
+            margin: 0;
+            font-size: 2.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .version {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: var(--dark);
+            margin-top: 30px;
+        }
+        .highlight-box {
+            background: #e1f5fe;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary);
+        }
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        code {
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95em;
+        }
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .brain-card {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .brain-item {
+            text-align: center;
+            padding: 15px;
+            background: #f0f4f8;
+            border-radius: 8px;
+        }
+        .brain-name {
+            display: block;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SolPro AI Assistant</h1>
+            <span class="version">Versión 1.0</span>
+        </header>
+
+        <p>Este manual detalla cómo operar, integrar y maximizar el potencial de tu nuevo sistema de <strong>Orquestación Local de 3 Cerebros</strong>.</p>
+
+        <h2>1. Introducción al Sistema</h2>
+        <p>SolPro AI utiliza un pipeline de procesamiento secuencial diseñado para minimizar errores humanos y técnicos mediante el uso coordinado de tres modelos de inteligencia artificial:</p>
+        
+        <div class="brain-card">
+            <div class="brain-item">
+                <span class="brain-name">Gemma 4 (26B)</span>
+                El Ingeniero Principal. Crea la lógica base y resuelve el problema técnico.
+            </div>
+            <div class="brain-item">
+                <span class="brain-name">Llama 3 (8B)</span>
+                El Arquitecto Revisor. Corrige errores, aplica estándares PEP8 y añade seguridad.
+            </div>
+            <div class="brain-item">
+                <span class="brain-name">Qwen (0.8B)</span>
+                El Editor Corporativo. Ajusta el tono al español profesional y limpia el código.
+            </div>
+        </div>
+
+        <h2>2. Instrucciones de Operación</h2>
+        <h3>Cómo iniciar el asistente:</h3>
+        <ul class="step-list">
+            <li>Ve a la carpeta <strong>AGENTES IA</strong> en tu escritorio.</li>
+            <li>Haz doble clic en el archivo <code>Lanzar_Asistente.bat</code>.</li>
+            <li>Se abrirá la interfaz gráfica (GUI) con el logotipo futurista de SolPro.</li>
+        </ul>
+
+        <h3>Pasos para generar una herramienta:</h3>
+        <div class="highlight-box">
+            <ol>
+                <li><strong>Tarea:</strong> Describe en lenguaje natural lo que necesitas programar.</li>
+                <li><strong>Nombre:</strong> Elige cómo quieres llamar al archivo (ej: <code>validador_precios.py</code>).</li>
+                <li><strong>Ejecutar:</strong> Haz clic en el botón azul de "INICIAR PIPELINE".</li>
+            </ol>
+        </div>
+
+        <h2>3. Integración con Proyectos</h2>
+        <p>Cuando trabajemos juntos en el chat, SolPro AI es tu <strong>Laboratorio Local</strong>:</p>
+        <ul>
+            <li><strong>Privacidad Total:</strong> Procesa datos sensibles de tu empresa localmente sin subirlos a la nube.</li>
+            <li><strong>Refinamiento Industrial:</strong> Toma cualquier código que yo te dé y pásalo por SolPro para hacerlo "Robusto para Producción".</li>
+            <li><strong>Generación de Módulos:</strong> Mientras diseñamos un gran sistema, usa SolPro para crear las pequeñas herramientas de automatización que lo acompañan.</li>
+        </ul>
+
+        <h2>4. Solución de Problemas</h2>
+        <p>Si el sistema parece no responder:</p>
+        <ul class="step-list">
+            <li><strong>Verifica Ollama:</strong> Asegúrate de que el servidor esté activo (icono en la barra de tareas).</li>
+            <li><strong>Memoria RAM:</strong> Cerrar otras aplicaciones pesadas ayuda a que modelos grandes como Gemma 26B carguen más rápido.</li>
+            <li><strong>Timeout:</strong> El sistema tiene 10 minutos de espera. Si tarda, es porque está haciendo "swapping" de modelos en tu tarjeta gráfica o RAM.</li>
+        </ul>
+
+        <h2>4. Integración Avanzada</h2>
+        <h3>Con Proyectos Existentes</h3>
+        <p>SolPro es un "Refactorizador Maestro". Puedes usarlo para mejorar código que ya tienes:</p>
+        <ul class="step-list">
+            <li><strong>Modo Inyección:</strong> Copia el código de un script antiguo y pégalo en SolPro para que el pipeline de 3 cerebros lo actualice a estándares modernos.</li>
+            <li><strong>Extensión de Funciones:</strong> Pide a SolPro que cree módulos adicionales para herramientas que ya tienes en otras carpetas.</li>
+        </ul>
+
+        <h3>Sinergia con Antigravity</h3>
+        <div class="highlight-box">
+            <p><strong>Antigravity (Estratega):</strong> Diseña la arquitectura global y resuelve problemas complejos de lógica.</p>
+            <p><strong>SolPro (Ejecutor):</strong> Toma las ideas de Antigravity y las convierte en scripts locales robustos, seguros y perfectamente documentados.</p>
+        </div>
+
+        <footer>
+            Manual de Usuario SolPro AI — Generado por tu Arquitecto de IA — 2026
+        </footer>
+    </div>
+</body>
+</html>

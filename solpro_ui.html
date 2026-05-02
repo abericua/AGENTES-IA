@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOLPRO AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #08090f;
+  --bg2:     #0d0f1a;
+  --sur:     rgba(255,255,255,0.055);
+  --surh:    rgba(255,255,255,0.09);
+  --brd:     rgba(255,255,255,0.10);
+  --brdB:    rgba(255,255,255,0.22);
+  --acc:     #00D4FF;
+  --acc2:    #00FF88;
+  --acc3:    #FF006E;
+  --glow:    rgba(0,212,255,0.30);
+  --glowS:   rgba(0,212,255,0.10);
+  --txt:     #F0F4FF;
+  --txt2:    rgba(240,244,255,0.60);
+  --txt3:    rgba(240,244,255,0.30);
+  --fd: 'Space Grotesk','Segoe UI',sans-serif;
+  --fb: 'DM Sans','Segoe UI',sans-serif;
+  --r1:8px; --r2:14px; --r3:22px;
+  --glass: blur(28px);
+  --gb:  rgba(255,255,255,0.055);
+  --gbd: 1px solid rgba(255,255,255,0.11);
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; cursor:none }
+body { background:var(--bg); color:var(--txt); font-family:var(--fb); min-height:100vh; overflow-x:hidden }
+
+#bgc { position:fixed; inset:0; z-index:0; pointer-events:none }
+.bgg {
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 0%,   rgba(0,212,255,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 35% at 80% 100%,  rgba(0,255,136,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 50%,   rgba(8,9,15,1) 40%,  transparent 100%)
+}
+
+.cur  { position:fixed;width:10px;height:10px;background:var(--acc);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s;mix-blend-mode:difference }
+.curr { position:fixed;width:34px;height:34px;border:1.5px solid var(--acc);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .07s,top .07s,width .25s,height .25s;opacity:.55 }
+.cur.hov  { width:18px; height:18px }
+.curr.hov { width:50px; height:50px; opacity:.25 }
+
+.app { position:relative;z-index:1;display:flex;flex-direction:column;height:100vh;padding:0 1.5rem }
+
+header { display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0 1rem;border-bottom:var(--gbd) }
+.logo  { display:flex;align-items:center;gap:.75rem }
+.logo-icon { width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;font-size:.95rem;color:#000;font-weight:900;box-shadow:0 0 18px var(--glow);font-family:var(--fb);letter-spacing:-.02em }
+.logo-name { font-family:var(--fd);font-size:1.3rem;font-weight:700;letter-spacing:-.01em;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent }
+.logo-sub  { font-size:.68rem;color:var(--txt3);letter-spacing:.18em;text-transform:uppercase;margin-top:.15rem;font-weight:500 }
+
+.pill { display:flex;align-items:center;gap:.5rem;padding:.35rem .9rem;border-radius:999px;background:var(--sur);border:var(--gbd);font-size:.72rem;font-family:var(--fb);font-weight:500;letter-spacing:.1em;text-transform:uppercase;backdrop-filter:var(--glass) }
+.dot  { width:7px;height:7px;border-radius:50%;background:var(--acc2);box-shadow:0 0 8px var(--acc2);transition:background .3s,box-shadow .3s }
+.dot.work { background:#f59e0b;box-shadow:0 0 8px #f59e0b;animation:pulse 1.2s infinite }
+.dot.err  { background:var(--acc3);box-shadow:0 0 8px var(--acc3) }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.main { display:grid;grid-template-columns:420px 1fr;gap:1rem;flex:1;overflow:hidden;padding-bottom:1rem;margin-top:1rem }
+
+.pl { display:flex;flex-direction:column;gap:.85rem;overflow-y:auto;padding-right:.25rem }
+.pl::-webkit-scrollbar { width:3px }
+.pl::-webkit-scrollbar-thumb { background:var(--brd);border-radius:4px }
+
+.card { background:var(--gb);backdrop-filter:var(--glass);border:var(--gbd);border-radius:var(--r2);box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06);padding:1.1rem 1.2rem }
+
+.lbl { font-family:var(--fb);font-size:.63rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--txt3);margin-bottom:.45rem }
+
+.frow { display:flex;gap:.5rem;align-items:center }
+.frow input { flex:1 }
+
+input[type=text], textarea {
+  width:100%;background:var(--sur);border:1px solid var(--brd);border-radius:var(--r1);
+  color:var(--txt);font-family:var(--fb);font-size:.88rem;font-weight:400;padding:.6rem .85rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;resize:none;letter-spacing:.01em
+}
+input[type=text]:focus, textarea:focus { border-color:var(--acc);box-shadow:0 0 0 3px var(--glowS) }
+input::placeholder, textarea::placeholder { color:var(--txt3) }
+
+.btn-sm {
+  padding:.6rem .85rem;background:var(--sur);border:1px solid var(--brd);border-radius:var(--r1);
+  color:var(--txt2);font-size:.72rem;font-family:var(--fb);font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  transition:background .2s,border-color .2s;white-space:nowrap
+}
+.btn-sm:hover { background:var(--surh);border-color:var(--brdB) }
+
+.btn-run {
+  width:100%;padding:.85rem;border:none;border-radius:var(--r1);
+  background:linear-gradient(135deg,var(--acc) 0%,#00a8cc 100%);
+  color:#000;font-family:var(--fb);font-weight:900;font-size:.88rem;letter-spacing:.18em;text-transform:uppercase;
+  box-shadow:0 0 24px var(--glow);transition:box-shadow .2s,transform .15s,opacity .2s
+}
+.btn-run:hover:not(:disabled) { box-shadow:0 0 42px var(--glow),0 0 80px rgba(0,212,255,.12);transform:scale(1.02) }
+.btn-run:disabled { opacity:.45;transform:none }
+
+.badges { display:flex;gap:.5rem }
+.badge {
+  flex:1;text-align:center;padding:.55rem .3rem;border-radius:var(--r1);
+  border:1px solid var(--brd);background:var(--sur);font-family:var(--fb);
+  font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--txt3);transition:border-color .3s,color .3s,box-shadow .3s
+}
+.badge.on { border-color:var(--ac);color:var(--ac);box-shadow:0 0 10px var(--ac) }
+.badge.ok { border-color:rgba(0,255,136,.35);color:var(--acc2) }
+
+.pgwrap { height:2px;background:var(--brd);border-radius:1px;overflow:hidden;margin:.3rem 0 }
+.pgbar  { height:100%;width:0%;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .6s ease;border-radius:1px }
+
+.chat-wrap { flex:1;overflow:hidden;display:flex;flex-direction:column }
+#chat { flex:1;overflow-y:auto;padding:.5rem 0;font-size:.78rem;line-height:1.65;font-family:'Courier New',monospace;color:var(--txt2) }
+#chat::-webkit-scrollbar { width:3px }
+#chat::-webkit-scrollbar-thumb { background:var(--brd);border-radius:4px }
+.mh { font-family:var(--fb);font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-top:.9rem;margin-bottom:.2rem }
+.mb { white-space:pre-wrap;word-break:break-word }
+
+.pr { display:flex;flex-direction:column;overflow:hidden }
+.ch { display:flex;align-items:center;justify-content:space-between;padding:.5rem .85rem;background:rgba(0,0,0,.35);border:var(--gbd);border-bottom:none;border-radius:var(--r2) var(--r2) 0 0 }
+.ch-l { display:flex;align-items:center;gap:.6rem }
+.dots span { width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:4px }
+.d1{background:#ff5f57}.d2{background:#febc2e}.d3{background:#28c840}
+.ctit { font-family:var(--fb);font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--txt3) }
+.cph  { font-size:.65rem;font-family:var(--fb);font-weight:500;color:var(--acc);letter-spacing:.1em;text-transform:uppercase;opacity:.8 }
+#code {
+  flex:1;overflow-y:auto;padding:1.2rem 1.4rem;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(12px);
+  border:var(--gbd);border-top:none;border-radius:0 0 var(--r2) var(--r2);
+  font-family:'Courier New',monospace;font-size:.82rem;line-height:1.7;
+  color:#7dd3fc;white-space:pre-wrap;word-break:break-word
+}
+#code::-webkit-scrollbar { width:4px }
+#code::-webkit-scrollbar-thumb { background:var(--brd);border-radius:4px }
+button { cursor:none }
+</style>
+</head>
+<body>
+
+<canvas id="bgc"></canvas>
+<div class="bgg"></div>
+<div class="cur"  id="cur"></div>
+<div class="curr" id="curr"></div>
+
+<div class="app">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">S</div>
+      <div>
+        <div class="logo-name">SOLPRO AI</div>
+        <div class="logo-sub">Estacion Multi-Agente &middot; 3 Cerebros</div>
+      </div>
+    </div>
+    <div class="pill">
+      <div class="dot" id="dot"></div>
+      <span id="stxt">Sistema listo</span>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="pl">
+
+      <div class="card">
+        <div class="lbl">Directorio del proyecto</div>
+        <div class="frow">
+          <input type="text" id="dir" placeholder="Ruta de salida...">
+          <button class="btn-sm" onclick="pickDir()" data-hover>Examinar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="lbl">Que deseas construir hoy?</div>
+        <textarea id="tarea" rows="5" placeholder="Describe tu idea. Ej: una calculadora de costos de importacion que lea un CSV y genere un reporte..."></textarea>
+      </div>
+
+      <div class="card">
+        <div class="lbl">Nombre del archivo final</div>
+        <input type="text" id="nombre" value="herramienta_solpro.py">
+      </div>
+
+      <div class="badges">
+        <div class="badge" id="b1" style="--ac:#60a5fa">Arquitecto</div>
+        <div class="badge" id="b2" style="--ac:#fb923c">Constructor</div>
+        <div class="badge" id="b3" style="--ac:#4ade80">Auditor</div>
+      </div>
+
+      <div class="pgwrap"><div class="pgbar" id="pg"></div></div>
+
+      <button class="btn-run" id="btn" onclick="iniciar()" data-hover>
+        Iniciar Pipeline de Agentes
+      </button>
+
+      <div class="card chat-wrap" style="flex:1;min-height:220px">
+        <div class="lbl" style="margin-bottom:.6rem">Mesa de dialogo</div>
+        <div id="chat"></div>
+      </div>
+
+    </div>
+
+    <div class="pr">
+      <div class="ch">
+        <div class="ch-l">
+          <div class="dots">
+            <span class="d1"></span><span class="d2"></span><span class="d3"></span>
+          </div>
+          <span class="ctit">Vista de codigo</span>
+        </div>
+        <span class="cph" id="cph">En espera...</span>
+      </div>
+      <pre id="code">// El codigo evolucionara aqui en tiempo real.
+// Plan  ->  Implementacion  ->  Codigo auditado.</pre>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Cursor SOLPRO ─────────────────────────────────────────────────────────────
+const cur  = document.getElementById('cur');
+const curr = document.getElementById('curr');
+document.addEventListener('mousemove', e => {
+  cur.style.left  = e.clientX + 'px'; cur.style.top  = e.clientY + 'px';
+  setTimeout(() => { curr.style.left = e.clientX + 'px'; curr.style.top = e.clientY + 'px'; }, 75);
+});
+document.querySelectorAll('[data-hover],button,input,textarea').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.classList.add('hov'); curr.classList.add('hov'); });
+  el.addEventListener('mouseleave', () => { cur.classList.remove('hov'); curr.classList.remove('hov'); });
+});
+
+// ── Particulas magneticas ─────────────────────────────────────────────────────
+const cvs = document.getElementById('bgc');
+const ctx = cvs.getContext('2d');
+const mouse = { x: -9999, y: -9999 };
+let pts = [];
+function initP() {
+  cvs.width = window.innerWidth; cvs.height = window.innerHeight;
+  pts = Array.from({ length: 70 }, () => ({
+    x:  Math.random() * cvs.width,  y:  Math.random() * cvs.height,
+    ox: Math.random() * cvs.width,  oy: Math.random() * cvs.height,
+    size: 0.8 + Math.random() * 1.8,
+    vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4
+  }));
+}
+document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+window.addEventListener('resize', initP);
+function animP() {
+  ctx.clearRect(0, 0, cvs.width, cvs.height);
+  pts.forEach(p => {
+    const dx = p.x - mouse.x, dy = p.y - mouse.y;
+    const d = Math.sqrt(dx * dx + dy * dy);
+    if (d < 110) { const f = (110 - d) / 110; p.x += (dx / d) * f * 7; p.y += (dy / d) * f * 7; }
+    else { p.x += (p.ox - p.x) * 0.045 + p.vx; p.y += (p.oy - p.y) * 0.045 + p.vy; }
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,212,255,0.45)'; ctx.fill();
+  });
+  requestAnimationFrame(animP);
+}
+initP(); animP();
+
+// ── Estado UI ─────────────────────────────────────────────────────────────────
+const AC = { 1: '#60a5fa', 2: '#fb923c', 3: '#4ade80' };
+let running = false;
+
+function setSt(txt, st) {
+  document.getElementById('stxt').textContent = txt;
+  const d = document.getElementById('dot');
+  d.className = 'dot' + (st === 'work' ? ' work' : st === 'err' ? ' err' : '');
+}
+function setPg(p)  { document.getElementById('pg').style.width = p + '%'; }
+function setCph(t) { document.getElementById('cph').textContent = t; }
+
+function setBadge(n) {
+  [1, 2, 3].forEach(i => {
+    const b = document.getElementById('b' + i);
+    b.classList.remove('on', 'ok');
+    if (i < n)  b.classList.add('ok');
+    if (i === n) b.classList.add('on');
+  });
+}
+
+function addChat(ag, col, txt) {
+  const c = document.getElementById('chat');
+  const h = document.createElement('div'); h.className = 'mh'; h.style.color = col; h.textContent = '> ' + ag;
+  const b = document.createElement('div'); b.className = 'mb'; b.style.color = 'rgba(240,244,255,0.6)'; b.textContent = txt;
+  c.appendChild(h); c.appendChild(b); c.scrollTop = c.scrollHeight;
+}
+
+function setCode(txt, fase) {
+  document.getElementById('code').textContent = txt;
+  if (fase) setCph(fase);
+}
+
+function pickDir() {
+  fetch('/pick-dir').then(r => r.json()).then(d => {
+    if (d.path) document.getElementById('dir').value = d.path;
+  });
+}
+
+// ── Pipeline ──────────────────────────────────────────────────────────────────
+async function iniciar() {
+  if (running) return;
+  const tarea  = document.getElementById('tarea').value.trim();
+  const nombre = document.getElementById('nombre').value.trim() || 'herramienta_solpro.py';
+  const dir    = document.getElementById('dir').value.trim();
+  if (!tarea) { addChat('SISTEMA', '#f87171', 'Describe la tarea antes de iniciar.'); return; }
+
+  running = true;
+  const btn = document.getElementById('btn');
+  btn.disabled = true; btn.textContent = 'Procesando...';
+  document.getElementById('chat').innerHTML = '';
+  setCode('Iniciando pipeline...', 'Preparando agentes');
+  setSt('Agentes trabajando', 'work'); setPg(0);
+
+  try {
+    // FASE 1: ARQUITECTO
+    setBadge(1); setPg(5); setCph('Fase 1 - Arquitecto planificando');
+    addChat('SISTEMA', 'rgba(240,244,255,0.3)', 'Iniciando pipeline de 3 agentes...');
+    const d1 = await callRun({ fase: 1, tarea, nombre, dir });
+    const plan = d1.texto || '';
+    await animChat('ARQUITECTO', AC[1], plan);
+    setCode('# PLAN DE ARQUITECTURA\n# ' + '='.repeat(50) + '\n\n' + plan, 'Fase 1 - Plan listo');
+    setPg(33);
+
+    // FASE 2: CONSTRUCTOR
+    setBadge(2); setCph('Fase 2 - Constructor implementando');
+    const d2 = await callRun({ fase: 2, tarea, plan, nombre, dir });
+    const rawCode = d2.texto || '';
+    await animChat('CONSTRUCTOR', AC[2], rawCode);
+    const codigo = extractCode(rawCode);
+    setCode(codigo, 'Fase 2 - Implementacion lista');
+    setPg(66);
+
+    // FASE 3: AUDITOR
+    setBadge(3); setCph('Fase 3 - Auditor verificando');
+    const d3 = await callRun({ fase: 3, tarea, plan, codigo, nombre, dir });
+    const rawFinal = d3.texto || '';
+    await animChat('AUDITOR', AC[3], rawFinal);
+    const codigoFinal = extractCode(rawFinal) || codigo;
+    setCode(codigoFinal, 'Fase 3 - Codigo auditado');
+    setPg(100);
+
+    [1, 2, 3].forEach(i => {
+      const b = document.getElementById('b' + i);
+      b.classList.remove('on'); b.classList.add('ok');
+    });
+    addChat('SISTEMA', '#4ade80', 'Pipeline completado. Archivo guardado: ' + nombre);
+    setSt('Completado', '');
+
+  } catch (e) {
+    addChat('ERROR', '#f87171', 'Error: ' + e.message);
+    setSt('Error', 'err');
+  } finally {
+    running = false;
+    btn.disabled = false; btn.textContent = 'Iniciar Pipeline de Agentes';
+  }
+}
+
+async function callRun(body) {
+  const r = await fetch('/run', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return r.json();
+}
+
+async function animChat(ag, col, texto) {
+  const c = document.getElementById('chat');
+  const h = document.createElement('div'); h.className = 'mh'; h.style.color = col; h.textContent = '> ' + ag;
+  const b = document.createElement('div'); b.className = 'mb'; b.style.color = 'rgba(240,244,255,0.65)';
+  c.appendChild(h); c.appendChild(b);
+  const words = texto.split(' ');
+  for (let i = 0; i < words.length; i++) {
+    b.textContent += (i === 0 ? '' : ' ') + words[i];
+    c.scrollTop = c.scrollHeight;
+    if (i % 10 === 0) await new Promise(r => setTimeout(r, 0));
+  }
+}
+
+function extractCode(txt) {
+  const m = txt.match(/```(?:python)?\s*([\s\S]*?)\s*```/);
+  return m ? m[1].trim() : txt.trim();
+}
+</script>
+</body>
+</html>

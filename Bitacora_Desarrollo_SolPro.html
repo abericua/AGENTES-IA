@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bitácora de Desarrollo - SolPro AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 40px; }
+        .container { max-width: 900px; margin: auto; }
+        h1 { font-family: 'Outfit', sans-serif; color: #38bdf8; text-align: center; font-size: 2.5em; margin-bottom: 50px; }
+        .timeline { border-left: 2px solid #38bdf8; padding-left: 30px; position: relative; }
+        .entry { margin-bottom: 40px; position: relative; }
+        .entry::before { content: ""; width: 16px; height: 16px; background: #38bdf8; border-radius: 50%; position: absolute; left: -39px; top: 5px; box-shadow: 0 0 10px #38bdf8; }
+        .date { font-weight: bold; color: #38bdf8; font-size: 0.9em; text-transform: uppercase; }
+        .card { background: #1e293b; padding: 25px; border-radius: 12px; margin-top: 10px; border: 1px solid #334155; }
+        .card h2 { margin-top: 0; color: #f1f5f9; font-size: 1.3em; }
+        .tech-tags { margin-top: 15px; }
+        .tag { background: #0ea5e9; color: white; padding: 3px 10px; border-radius: 5px; font-size: 0.75em; margin-right: 5px; font-weight: bold; }
+        .description { margin-top: 15px; color: #94a3b8; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bitácora de Desarrollo: SolPro AI Assistant</h1>
+        
+        <div class="timeline">
+            <!-- Entrada 7 -->
+            <div class="entry">
+                <div class="date">Fase 7: Optimización de Arquitectura y Sinergia</div>
+                <div class="card">
+                    <h2>Modo de Alta Velocidad & Sinergia Antigravity</h2>
+                    <div class="description">
+                        Diagnóstico de cuello de botella por Swap de Memoria (Gemma 26B). Refactorización del pipeline para usar exclusivamente Llama 3 (8B) y Qwen (0.8B), reduciendo el consumo de RAM a 5GB y el tiempo de respuesta de 3 minutos a ~30 segundos. Formalización del flujo de trabajo donde Antigravity (Nube) actúa como Estratega y SolPro (Local) como Ejecutor de bajo nivel, maximizando la eficiencia sin comprometer la capacidad lógica del proyecto.
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">LLAMA 3 (8B)</span> <span class="tag">PERFORMANCE TUNING</span> <span class="tag">CLOUD-LOCAL SYNERGY</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entrada 6 -->
+            <div class="entry">
+                <div class="date">Fase 6: Integración de Proyectos</div>
+                <div class="card">
+                    <h2>Selector de Carpeta Dinámico</h2>
+                    <div class="description">
+                        Implementación del buscador de directorios en la GUI. Ahora los agentes pueden escribir directamente dentro de la carpeta de un proyecto existente, facilitando la integración continua.
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">TKINTER</span> <span class="tag">FILEDIALOG</span> <span class="tag">PATHLIB</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entrada 5 -->
+            <div class="entry">
+                <div class="date">Fase 5: Interfaz Gráfica (GUI)</div>
+                <div class="card">
+                    <h2>Nacimiento de la Estación de Trabajo</h2>
+                    <div class="description">
+                        Creación de asistente_gui.py con diseño Dark Mode, log de consola en tiempo real y gráficos de IA generados. Implementación de threading para evitar congelamiento de UI durante llamadas a LLMs.
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">GUI</span> <span class="tag">THREADING</span> <span class="tag">UX/UI</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entrada 4 -->
+            <div class="entry">
+                <div class="date">Fase 4: Arquitectura y Resiliencia</div>
+                <div class="card">
+                    <h2>Pipeline de Auditoría Nativa</h2>
+                    <div class="description">
+                        Migración de requests a urllib.request (cero dependencias). Aumento de timeout a 600s. Sistema de archivos de auditoría intermedios (audit_1, audit_2) para control de calidad.
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">URLLIB</span> <span class="tag">TIMEOUT=600S</span> <span class="tag">AUDIT_LOGS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entrada 3 -->
+            <div class="entry">
+                <div class="date">Fase 3: Orquestación de 3 Cerebros</div>
+                <div class="card">
+                    <h2>Pipeline Secuencial</h2>
+                    <div class="description">
+                        Implementación de la cadena Gemma (Lógica) -> Llama 3 (Revisión) -> Qwen (Pulido). Establecimiento de roles específicos para cada modelo.
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">GEMMA 26B</span> <span class="tag">LLAMA 3</span> <span class="tag">QWEN 0.8B</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entrada 2 -->
+            <div class="entry">
+                <div class="date">Fase 2: Automatización Básica</div>
+                <div class="card">
+                    <h2>Extracción de Código Inteligente</h2>
+                    <div class="description">
+                        Uso de expresiones regulares para limpiar etiquetas markdown de los LLMs. Implementación de guardado automático de archivos .py.
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">REGEX</span> <span class="tag">FILE_IO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entrada 1 -->
+            <div class="entry">
+                <div class="date">Fase 1: Conexión Local</div>
+                <div class="card">
+                    <h2>Bridge Inicial de Ollama</h2>
+                    <div class="description">
+                        Establecimiento de la comunicación con la API local de Ollama (puerto 11434). Primer script funcional de orquestación entre modelos locales.
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">OLLAMA API</span> <span class="tag">PYTHON</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <p style="text-align: center; margin-top: 50px; color: #475569; font-size: 0.8em;">
+            Bitácora de Ingeniería — Arquitecto de Software & Desarrollador IA — 2026
+        </p>
+    </div>
+</body>
+</html>
