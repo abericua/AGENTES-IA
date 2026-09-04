@@ -1,0 +1,3 @@
+## 2024-05-18 - Semantic HTML Label Elements
+**Learning:** This application's custom components occasionally use `div` elements visually styled as labels instead of semantic `label` elements with the `for` attribute, reducing accessibility by not properly associating labels with their input fields.
+**Action:** When working with forms or inputs in this UI, ensure that descriptive text for input fields uses the semantic `<label for="...">` tag rather than a stylized `<div>`. Because `label` is an inline element, you may need to apply `display: block;` (or adjust flexbox/grid properties) on the CSS class to maintain the intended layout of the form.
