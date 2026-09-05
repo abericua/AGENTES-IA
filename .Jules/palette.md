@@ -1,0 +1,3 @@
+## 2024-06-25 - Converted Form Divs to Semantic Labels
+**Learning:** Using styled `<div>` elements as visual labels for inputs breaks screen reader accessibility and prevents the native click-to-focus behavior that users expect when clicking on a field's title.
+**Action:** Always use semantic `<label for="inputId">` instead of generic container tags. When doing so on existing `.lbl` classes, ensure `display: block` is added to CSS so the visual flow of the UI component system is preserved.
