@@ -1,0 +1,3 @@
+## 2024-03-21 - Semantic HTML for Labels
+**Learning:** Using stylized `<div>` elements as form labels causes accessibility issues, as screen readers cannot associate the text with the corresponding input field. Using proper `<label for="...">` elements matching the input's `id` makes forms natively accessible and screen-reader friendly.
+**Action:** When creating forms, always use `<label>` instead of `<div class="lbl">` and ensure the `for` attribute matches the corresponding `<input>` or `<textarea>` id. If the design requires it to appear on its own line like a div, add `display: block` to the CSS.
