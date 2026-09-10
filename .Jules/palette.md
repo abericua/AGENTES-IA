@@ -1,0 +1,3 @@
+## 2024-05-17 - Replace Divs with Semantic Labels
+**Learning:** Found a pattern in this application where stylized `<div class="lbl">` elements are used as visual labels for form inputs (`#dir`, `#tarea`, `#nombre`). This limits screen reader accessibility since the visual label is not semantically tied to the input.
+**Action:** Always prefer semantic HTML tags like `<label for="...">` over generic `<div>` tags to improve accessibility, and apply necessary CSS adjustments (`display: block;`) to ensure the layout remains identical. Added semantic tags along with required attributes and ARIA attributes (e.g. `aria-label` for icon/text buttons).
