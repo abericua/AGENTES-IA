@@ -1,0 +1,3 @@
+## 2023-10-27 - Converting form label divs to semantic HTML labels
+**Learning:** When improving accessibility by converting styled `<div>` elements that act as labels into semantic `<label>` elements, it's often necessary to add `display: block` (or ensure they behave as block-level elements). Without this, the new inline `<label>` tag will break the layout that was previously maintained by the block-level `<div>`.
+**Action:** Always check the display property of the element being replaced, and explicitly add `display: block` to the CSS class if replacing a `div` with a `label`.
