@@ -163,7 +163,7 @@ button { cursor:none }
     <div class="pl">
 
       <div class="card">
-        <div class="lbl">Directorio del proyecto</div>
+        <label for="dir" class="lbl" style="display:block">Directorio del proyecto</label>
         <div class="frow">
           <input type="text" id="dir" placeholder="Ruta de salida...">
           <button class="btn-sm" onclick="pickDir()" data-hover>Examinar</button>
@@ -171,12 +171,12 @@ button { cursor:none }
       </div>
 
       <div class="card">
-        <div class="lbl">Que deseas construir hoy?</div>
+        <label for="tarea" class="lbl" style="display:block">Que deseas construir hoy?</label>
         <textarea id="tarea" rows="5" placeholder="Describe tu idea. Ej: una calculadora de costos de importacion que lea un CSV y genere un reporte..."></textarea>
       </div>
 
       <div class="card">
-        <div class="lbl">Nombre del archivo final</div>
+        <label for="nombre" class="lbl" style="display:block">Nombre del archivo final</label>
         <input type="text" id="nombre" value="herramienta_solpro.py">
       </div>
 
