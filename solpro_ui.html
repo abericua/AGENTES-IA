@@ -88,6 +88,7 @@ input::placeholder, textarea::placeholder { color:var(--txt3) }
   transition:background .2s,border-color .2s;white-space:nowrap
 }
 .btn-sm:hover { background:var(--surh);border-color:var(--brdB) }
+.btn-sm:focus-visible { border-color:var(--acc); outline:2px solid var(--acc); outline-offset: 2px; }
 
 .btn-run {
   width:100%;padding:.85rem;border:none;border-radius:var(--r1);
@@ -96,6 +97,7 @@ input::placeholder, textarea::placeholder { color:var(--txt3) }
   box-shadow:0 0 24px var(--glow);transition:box-shadow .2s,transform .15s,opacity .2s
 }
 .btn-run:hover:not(:disabled) { box-shadow:0 0 42px var(--glow),0 0 80px rgba(0,212,255,.12);transform:scale(1.02) }
+.btn-run:focus-visible { outline:2px solid var(--acc); outline-offset: 2px; box-shadow:0 0 42px var(--glow); }
 .btn-run:disabled { opacity:.45;transform:none }
 
 .badges { display:flex;gap:.5rem }
@@ -155,7 +157,7 @@ button { cursor:none }
     </div>
     <div class="pill">
       <div class="dot" id="dot"></div>
-      <span id="stxt">Sistema listo</span>
+      <span id="stxt" aria-live="polite" aria-atomic="true">Sistema listo</span>
     </div>
   </header>
 
@@ -186,7 +188,7 @@ button { cursor:none }
         <div class="badge" id="b3" style="--ac:#4ade80">Auditor</div>
       </div>
 
-      <div class="pgwrap"><div class="pgbar" id="pg"></div></div>
+      <div class="pgwrap" role="progressbar" aria-label="Progreso del pipeline" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="pgbar" id="pg"></div></div>
 
       <button class="btn-run" id="btn" onclick="iniciar()" data-hover>
         Iniciar Pipeline de Agentes
@@ -207,7 +209,7 @@ button { cursor:none }
           </div>
           <span class="ctit">Vista de codigo</span>
         </div>
-        <span class="cph" id="cph">En espera...</span>
+        <span class="cph" id="cph" aria-live="polite" aria-atomic="true">En espera...</span>
       </div>
       <pre id="code">// El codigo evolucionara aqui en tiempo real.
 // Plan  ->  Implementacion  ->  Codigo auditado.</pre>
@@ -268,7 +270,10 @@ function setSt(txt, st) {
   const d = document.getElementById('dot');
   d.className = 'dot' + (st === 'work' ? ' work' : st === 'err' ? ' err' : '');
 }
-function setPg(p)  { document.getElementById('pg').style.width = p + '%'; }
+function setPg(p)  {
+  document.getElementById('pg').style.width = p + '%';
+  document.querySelector('.pgwrap').setAttribute('aria-valuenow', p);
+}
 function setCph(t) { document.getElementById('cph').textContent = t; }
 
 function setBadge(n) {
