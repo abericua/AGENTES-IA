@@ -80,6 +80,7 @@ input[type=text], textarea {
 }
 input[type=text]:focus, textarea:focus { border-color:var(--acc);box-shadow:0 0 0 3px var(--glowS) }
 input::placeholder, textarea::placeholder { color:var(--txt3) }
+input:disabled, textarea:disabled, .btn-sm:disabled { opacity: 0.5; pointer-events: none; }
 
 .btn-sm {
   padding:.6rem .85rem;background:var(--sur);border:1px solid var(--brd);border-radius:var(--r1);
@@ -166,7 +167,7 @@ button { cursor:none }
         <label for="dir" class="lbl" style="display:block">Directorio del proyecto</label>
         <div class="frow">
           <input type="text" id="dir" placeholder="Ruta de salida...">
-          <button class="btn-sm" onclick="pickDir()" data-hover>Examinar</button>
+          <button class="btn-sm" id="btn-dir" onclick="pickDir()" data-hover>Examinar</button>
         </div>
       </div>
 
@@ -309,6 +310,10 @@ async function iniciar() {
   running = true;
   const btn = document.getElementById('btn');
   btn.disabled = true; btn.textContent = 'Procesando...';
+  document.getElementById('tarea').disabled = true;
+  document.getElementById('nombre').disabled = true;
+  document.getElementById('dir').disabled = true;
+  document.getElementById('btn-dir').disabled = true;
   document.getElementById('chat').innerHTML = '';
   setCode('Iniciando pipeline...', 'Preparando agentes');
   setSt('Agentes trabajando', 'work'); setPg(0);
@@ -354,6 +359,10 @@ async function iniciar() {
   } finally {
     running = false;
     btn.disabled = false; btn.textContent = 'Iniciar Pipeline de Agentes';
+    document.getElementById('tarea').disabled = false;
+    document.getElementById('nombre').disabled = false;
+    document.getElementById('dir').disabled = false;
+    document.getElementById('btn-dir').disabled = false;
   }
 }
 
