@@ -155,7 +155,7 @@ button { cursor:none }
     </div>
     <div class="pill">
       <div class="dot" id="dot"></div>
-      <span id="stxt">Sistema listo</span>
+      <span id="stxt" aria-live="polite">Sistema listo</span>
     </div>
   </header>
 
@@ -186,7 +186,7 @@ button { cursor:none }
         <div class="badge" id="b3" style="--ac:#4ade80">Auditor</div>
       </div>
 
-      <div class="pgwrap"><div class="pgbar" id="pg"></div></div>
+      <div class="pgwrap"><div class="pgbar" id="pg" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>
 
       <button class="btn-run" id="btn" onclick="iniciar()" data-hover>
         Iniciar Pipeline de Agentes
@@ -194,7 +194,7 @@ button { cursor:none }
 
       <div class="card chat-wrap" style="flex:1;min-height:220px">
         <div class="lbl" style="margin-bottom:.6rem">Mesa de dialogo</div>
-        <div id="chat"></div>
+        <div id="chat" role="log" aria-live="polite"></div>
       </div>
 
     </div>
@@ -268,7 +268,7 @@ function setSt(txt, st) {
   const d = document.getElementById('dot');
   d.className = 'dot' + (st === 'work' ? ' work' : st === 'err' ? ' err' : '');
 }
-function setPg(p)  { document.getElementById('pg').style.width = p + '%'; }
+function setPg(p)  { const pg = document.getElementById('pg'); pg.style.width = p + '%'; pg.setAttribute('aria-valuenow', p); }
 function setCph(t) { document.getElementById('cph').textContent = t; }
 
 function setBadge(n) {
