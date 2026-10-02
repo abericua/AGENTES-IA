@@ -88,6 +88,7 @@ input::placeholder, textarea::placeholder { color:var(--txt3) }
   transition:background .2s,border-color .2s;white-space:nowrap
 }
 .btn-sm:hover { background:var(--surh);border-color:var(--brdB) }
+.btn-sm:focus-visible { border-color:var(--acc);box-shadow:0 0 0 3px var(--glowS);outline:none }
 
 .btn-run {
   width:100%;padding:.85rem;border:none;border-radius:var(--r1);
@@ -96,6 +97,7 @@ input::placeholder, textarea::placeholder { color:var(--txt3) }
   box-shadow:0 0 24px var(--glow);transition:box-shadow .2s,transform .15s,opacity .2s
 }
 .btn-run:hover:not(:disabled) { box-shadow:0 0 42px var(--glow),0 0 80px rgba(0,212,255,.12);transform:scale(1.02) }
+.btn-run:focus-visible { box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--acc);outline:none }
 .btn-run:disabled { opacity:.45;transform:none }
 
 .badges { display:flex;gap:.5rem }
