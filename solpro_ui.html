@@ -135,6 +135,11 @@ input::placeholder, textarea::placeholder { color:var(--txt3) }
 #code::-webkit-scrollbar { width:4px }
 #code::-webkit-scrollbar-thumb { background:var(--brd);border-radius:4px }
 button { cursor:none }
+
+button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--acc2);
+  outline-offset: 2px;
+}
 </style>
 </head>
 <body>
