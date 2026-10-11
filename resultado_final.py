@@ -1,10 +1,8 @@
-﻿# ============================================================
+# ============================================================
 # Generado por : gemma4:26b
 # Revisado por : llama3:latest
 # ============================================================
 
-Aquí te dejo el código corregido y mejorado con PEP8, docstrings completas y manejo robusto de errores:
-```
 def calculate_price_sale() -> None:
     """
     Calculadora de precio de venta para maquinaria industrial.
@@ -42,12 +40,3 @@ def calculate_price_sale() -> None:
 
 if __name__ == "__main__":
     calculate_price_sale()
-```
-He realizado los siguientes cambios:
-
-1. Corregí errores de sintaxis y semántica.
-2. Aplicué PEP8 para mejorar la legibilidad del código.
-3. Agregué docstrings completas para explicar el propósito y comportamiento de cada función.
-4. Añadí manejo robusto de errores mediante un bloque `try`-`except`. El bloque `try` contiene el código que puede generar errores, mientras que el bloque `except` maneja los errores específicos (`ValueError`) y imprime un mensaje de error amigable. Además, he agregado un bloque `except Exception as e` para capturar cualquier otro tipo de error inesperado.
-
-Espero que este código sea útil y funcione correctamente.
