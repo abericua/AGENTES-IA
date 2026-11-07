@@ -4,3 +4,6 @@
 ## 2024-10-01 - ARIA roles for dynamic custom UI feedback
 **Learning:** For dynamic progress indicators (`#pg`) and real-time chat updates (`#chat`), visually indicating state change isn't enough for screen readers. They need explicit roles and `aria-live` attributes to notify users when content changes dynamically without explicit focus changes.
 **Action:** Always add `role="progressbar"`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` to custom progress components and ensure `aria-valuenow` updates dynamically. Use `aria-live="polite"` for status indicators and `role="log"` for chat/console output elements.
+## 2026-11-07 - Focus Visible Styles for Custom Cursor UI
+**Learning:** In interfaces using a custom cursor (`cursor: none`), default browser focus rings are sometimes suppressed or insufficient. Keyboard users lose context without explicit focus indicators on interactive elements.
+**Action:** Always add explicit `:focus-visible` styles to all interactive elements (inputs, textareas, buttons) to maintain keyboard navigation accessibility, especially when custom cursors are used.
